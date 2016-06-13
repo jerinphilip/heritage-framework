@@ -9,3 +9,16 @@ class InterestPoint(models.Model):
 class InterestPointLocation(models.Model):
     interest_point = models.ForeignKey('InterestPoint', on_delete=models.CASCADE)
     location = models.PointField("location")
+
+
+class Image(models.Model):
+    image = models.FileField(upload_to='uploads/')
+    caption = models.CharField('caption', max_length=200)
+
+
+class ImageLocation(models.Model):
+    image = models.ForeignKey('Image', on_delete=models.CASCADE)
+    location = models.PointField("location")
+
+
+
