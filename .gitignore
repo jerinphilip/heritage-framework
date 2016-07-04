@@ -1,2 +1,4 @@
-heritage/__pycache__/
+heritage/heritage/__pycache__/
+uploads/
 *.pyc
+.*.swp
