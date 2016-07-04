@@ -1,4 +1,3 @@
-import os
 from PIL import Image
 from PIL.ExifTags import TAGS
 
@@ -26,10 +25,9 @@ def get_exif(fn):
 def get_lat_long(img):
     exif = get_exif(img)["GPSInfo"]
     try:
-        lat = exif[2]
-        lon = exif[4]
-        #print(lat, lon)
+        lon = exif[2]
+        lat = exif[4]
         res = (convert(lat), convert(lon))
-        return res 
+        return res
     except:
         return (None, None)

@@ -4,6 +4,8 @@ from django.contrib.gis.db import models
 class InterestPoint(models.Model):
     title = models.CharField("title", max_length=50)
     description = models.CharField("description", max_length=500)
+    def __str__(self):
+        return self.title
 
 
 class InterestPointLocation(models.Model):
@@ -19,6 +21,3 @@ class Image(models.Model):
 class ImageLocation(models.Model):
     image = models.ForeignKey('Image', on_delete=models.CASCADE)
     location = models.PointField("location")
-
-
-
