@@ -56,7 +56,14 @@ def interestpoint(request):
 
 def interestpointlocation(request):
     if request.method == 'POST':
-        pass
+        form = forms.InterestPointLocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            html = "<html><body>Success!</body></html>"
+            return HttpResponse(html)
+        else:
+            html = "<html><body>"+str(form.errors)+"</body></html>"
+            return HttpResponse(html, status=400)
     else:
         form = forms.InterestPointLocationForm()
         return render(request, 'interestpointlocation.html', {'form': form})

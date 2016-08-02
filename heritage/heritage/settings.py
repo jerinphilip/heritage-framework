@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'heritage.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
-        'NAME': os.path.join(BASE_DIR, 'db.spatialite'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        #'NAME': os.path.join(BASE_DIR, 'db.spatialite'),
+        'NAME': 'heritage',
+        'USER': 'heritage',
+        'PASSWORD': 'heritagepass',
     }
 }
 
