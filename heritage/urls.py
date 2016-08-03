@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib.gis import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import static
+from heritage import settings
 from . import views
 
 urlpatterns = [
@@ -24,3 +27,6 @@ urlpatterns = [
     url(r'^interestpoint/$', views.interestpoint),
     url(r'^interestpointlocation/$', views.interestpointlocation),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static('uploads/', document_root=settings.MEDIA_ROOT)

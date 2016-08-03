@@ -126,3 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
+
+MEDIA_ROOT = '/home/heritage/heritage/src/uploads'
+MEDIA_URL = '/'
