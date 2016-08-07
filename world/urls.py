@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^mapInteractive/create/$', views.interestPointCreate),
     url(r'^mapInteractive/edit/$', views.interestPointEdit),
     url(r'^mapOperation/$', views.mapOperation, name='mapOperation'),
+    url(r'^form/$', views.mapForm),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
