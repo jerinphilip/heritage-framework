@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Maps</title>
+	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/static/css/mobile.css">
+	<script src="/static/js/mobile.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<div id="navigation">
+				<span id="mobile-navigation">&nbsp;</span>
+				<a href="" class="logo"><img src="/static/images/logo.png" alt=""></a>
+				<ul id="menu">
+					<li>
+						<a href="">Home</a>
+					</li>
+					<li>
+						<a href="/about">About</a>
+					</li>
+					<li class="selected">
+						<a href="/map">Map</a>
+						<ul>
+							<li>
+								<a href="/static/runningsinglepost.html">Running single post</a>
+							</li>
+						</ul>
+					</li>
+					
+					<li>
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="body" class="running">
+			<div>
+				<h1>Map</h1>
+				<br><br>
+                <iframe width="970" height="680" src="{% url 'mapInteractive' %}"></iframe>
+			</div>
+		</div>
+		<div id="footer">
+			<div>
+				<div class="connect">
+					<a href="/static/#" class="twitter">twitter</a>
+					<a href="/static/#" class="facebook">facebook</a>
+					<a href="/static/#" class="googleplus">googleplus</a>
+					<a href="/static/#" class="pinterest">pinterest</a>
+				</div>
+				<p>&copy; 2016 CVIT IIIT Hyderabad.. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

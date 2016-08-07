@@ -7,5 +7,12 @@ from django.contrib.staticfiles.urls import static
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.post_list, name='post_list'),
+    url(r'^$', views.index, name='index'),
+    url(r'^map/$', views.mappage, name=''),
+    url(r'^mapInteractive/$', views.mapInteractive, name='mapInteractive'),
+    url(r'^mapInteractive/create/$', views.interestPointCreate),
+    url(r'^mapInteractive/edit/$', views.interestPointEdit),
+    url(r'^mapOperation/$', views.mapOperation, name='mapOperation'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

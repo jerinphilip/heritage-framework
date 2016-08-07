@@ -1,0 +1,161 @@
+{% load map_utils %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Map</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{ form.media }} 
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.maphilight.min.js"></script>
+
+        <script type="text/javascript">$(function() {
+            $('.map').maphilight();
+            });</script>
+
+    </head>
+    <body>
+        <img class = "map" src="{{img_url}}" alt="No map found!" height="650" width="950" usemap="#imagemap"/>
+        <map name="imagemap" id="Map">
+
+
+            {% for i in rows %}
+            {% for j  in columns %}
+
+            <area alt="" data-toggle="modal" class="mapArea" shape="rect" coords="{% mapCoords i j %}" x="{{i}}" y="{{j}}" >
+
+            {% endfor %}
+            {% endfor %}
+        </map>
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"> Create an Interest Point</h4> 
+                            <img src = "/static/images/logo.png" height = "60" />
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container">
+                                <form action="create/" method="post" class="form-horizontal" role="form">
+                                    {% csrf_token %}                                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Interest Point</label>
+                                        <div class="col-sm-7">
+                                            {{form.title}}
+                                        </div>
+                                    </div>
+                                    <input id="x" value ="3" type="hidden" name="x" />
+                                    <input id="y" value = "5" type="hidden" name="y" />
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-7">
+                                            {{form.description}}
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="Submit" class="btn btn-default"/>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myEditModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                           <h4 class="modal-title"> Edit Interest Point</h4>  
+                           <img src = "/static/images/logo.png" height = "60" />
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container">
+                                <form action="edit/" method="post" class="form-horizontal" role="form">
+                                    {% csrf_token %}                                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Interest Point</label>
+                                        <div class="col-sm-7">
+                                            {{form.title}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-7">
+                                            {{form.location}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-7">
+                                            {{form.description}}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Files</label>
+                                            <div class="tech-slideshow">
+                                           {% for i in files %}
+                                           <a href="{{i}}"/>
+                                           {%endfor%}   
+                                    <input type="submit" value="Submit" class="btn btn-default"/>
+                                    
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $(".mapArea").off("click").on("click", function(e){
+            //GET request with xy and with that responde decide which form to open
+        
+        var x = $($(this)).attr("x"); 
+        var y = $($(this)).attr("y"); 
+ 
+        $("#x").attr("value", x);
+        $("#y").attr("value", y);
+        
+        $.ajax({     
+             type: "GET",
+             url: '/mapOperation/',
+             data: {"x":x, "y":y},
+             success: function (data) {
+                 if(data["operation"]=="create")
+                    $("#myModal").modal("show");
+                 else if (data["operation"] == "edit")
+                    $("#myEditModal").modal("show");      
+             },
+            });
+
+        });
+    });
+    </script>
+
+
+</html>
