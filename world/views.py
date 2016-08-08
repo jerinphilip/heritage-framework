@@ -5,55 +5,16 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.geos import GEOSGeometry
 
 import datetime
-import json
-# import heritage.models as HeritageSite 
+import json 
 from .models import InterestPoint
 from .models import Image
 
 from .forms import InterestPointForm
 from .forms import UploadFileForm
 
-# Create your views here.
-# def post_list(request):
-#     return render(request, 'world/home.html', {})m
-
 def post_list(request):
 	form = MapImageForm()
 	return render(request, 'world/home.html', {'form': form})
-
-# import heritage.forms as forms
-# from django.contrib.gis.geos import Point
-# from django.core.exceptions import ObjectDoesNotExist
-# import heritage.models as HeritageSite 
-# from heritage.models import InterestPoint 
-
-# def current_datetime(request):
-#     now = datetime.datetime.now()
-#     html = "<html><body>It is now %s.</body></html>" % now
-#     return HttpResponse(html)
-
-# def image(request):
-#     if request.method == 'POST':
-#         form = forms.ImageForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             imageObject = form.save()
-#             image_file = form.cleaned_data.get('image')
-#             add_image_location(image_file, imageObject)
-#             html = "<html><body>Success!</body></html>"
-#             return HttpResponse(html)
-#         else:
-#             html = "<html><body>"+str(form.errors)+"</body></html>"
-#             return HttpResponse(html, status=400)
-#     else:
-#         form = forms.ImageForm()
-#         return render(request, 'image.html', {'form': form})
-
-
-# def interestpoint(request):
-#     lul= GEOSGeometry('POINT (%d %d)' %( 17.382200, 78.398806), srid=4326)                 
-#     llr = GEOSGeometry('POINT (%d %d)' %(17.384596, 78.403249), srid=4326)                 
-#     form = forms.InterestPointForm(initial={'location': loc})
-#     return render(request, 'map.html', {'rows':range(12), 'columns':range(12),'form':form, 'lul':lul, 'llr':llr, 'img_url':img_url})
 
 def latitude(point):                                                    
 	return float(point.y)                                                      
@@ -69,31 +30,8 @@ def gpsCoords(i,j,ul, lr,l,b):
 	loc = GEOSGeometry('POINT (%f %f)' %(lon, lat))          
 	return (loc)                                                        
 
-# def interestpointlocation(request):
-#     if request.method == 'POST':                                        
-#         form = forms.InterestPointLocationForm(request.POST)            
-#         if form.is_valid():                                             
-#             form.save()                                                 
-#         else:                                                           
-#             html = "<html><body>"+str(form.errors)+"</body></html>"         
-#             return HttpResponse(html, status=400)                       
-#     else:                                                               
-#         form = forms.InterestPointLocationForm()     
-#         return render(request, 'interestpointlocation.html', {'form': form})
-
-
 def index(request):
 	return render(request, 'world/index.html')
-
-# def heritage(request):
-#     if request.method == 'POST':
-#         form = forms.HeritageSiteForm(request.POST)
-#         if form.is_valid():
-#             form.save();
-#         else:
-#             html = "<html><body>"+str(form.errors)+"</body></html>"
-#             return HttpResponse(html, status=400)
-
 
 def mappage(request):
 	return render(request, 'world/mappage.html')
@@ -230,13 +168,13 @@ def mapForm(request):
 def uploadFile(request):
 	if request.method == "POST":
 		form = UploadFileForm(request.POST, request.FILES)
-        	if form.is_valid():
-            		imageObject = form.save()
-            		html = "<html><body>"+"Success!"+"</body></html>"
-            		return HttpResponse(html)
-        	else:
-            		html = "<html><body>"+str(form.errors)+"</body></html>"
-            		return HttpResponse(html, status=400)
+		if form.is_valid():
+			imageObject = form.save()
+			html = "<html><body>"+"Success!"+"</body></html>"
+			return HttpResponse(html)
+		else:
+			html = "<html><body>"+str(form.errors)+"</body></html>"
+			return HttpResponse(html, status=400)
 	if request.method == "GET":
 		form = UploadFileForm();
 		return render(request, 'uploadFile.html', {'form':form})
