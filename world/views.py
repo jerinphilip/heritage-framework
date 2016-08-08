@@ -227,14 +227,14 @@ def mapForm(request):
 
 def uploadFile(request):
 	if request.method == "POST":
-		form = UploadFileForm(request.POST, request.FILES)             
-        	if form.is_valid():                                             
+		form = UploadFileForm(request.POST, request.FILES)
+        	if form.is_valid():
             		imageObject = form.save()
-            		html = "<html><body>"+"Success!"+"</body></html>"                                 
-            		return HttpResponse(html)                                   
-        	else:                                                           
-            		html = "<html><body>"+str(form.errors)+"</body></html>"         
-            		return HttpResponse(html, status=400)  
+            		html = "<html><body>"+"Success!"+"</body></html>"
+            		return HttpResponse(html)
+        	else:
+            		html = "<html><body>"+str(form.errors)+"</body></html>"
+            		return HttpResponse(html, status=400)
 	if request.method == "GET":
 		form = UploadFileForm();
 		return render(request, 'uploadFile.html', {'form':form})
