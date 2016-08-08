@@ -28,6 +28,6 @@ class InterestPoint(models.Model):
 
 class Image(models.Model):
     interest_point = models.ForeignKey('InterestPoint', on_delete=models.CASCADE)
-    image = models.FileField(upload_to='uploads/')
+    image = models.FileField(upload_to='./')
     caption = models.CharField('caption', max_length=200)
 

@@ -8,6 +8,7 @@ import datetime
 import json
 # import heritage.models as HeritageSite 
 from .models import InterestPoint
+from .models import Image
 
 from .forms import InterestPointForm
 from .forms import UploadFileForm
@@ -189,7 +190,8 @@ def mapForm(request):
 		if(len(interest_point)==1):
 			ip = InterestPoint.objects.filter(location=location)
 			form = InterestPointForm(instance=ip[0])
-			return render(request, 'form.html', {'form':form, 'x':x,'y':y})
+			images = Image.objects.filter(interest_point=ip[0])
+			return render(request, 'form.html', {'form':form, 'x':x,'y':y, 'images':images})
 
 	if request.method == 'POST':
 			x = request.POST.get('x', None)

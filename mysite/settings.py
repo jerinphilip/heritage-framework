@@ -129,5 +129,5 @@ POSTGIS_TEMPLATE = 'geology'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = '/home/anuj/cvit/sample/geodjango_setup/world/'                      
+MEDIA_ROOT = '/home/anuj/cvit/sample/geodjango_setup/world/uploads/'                      
 MEDIA_URL = '/' 
