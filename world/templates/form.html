@@ -1,3 +1,13 @@
 <html>
-{{form}}
+	<body>
+		<form action ="/form/" method ="post" enctype="multipart/form-data" > 
+				{% csrf_token %}
+				{{form}}
+				<input type="hidden" name="x" value="{{x}}">
+
+				<input type="hidden" name="y" value="{{y}}">
+			<input value = "submit" type ="submit" class="btn btn-default"/>
+		</form>
+	</body>
 </html>
+ 

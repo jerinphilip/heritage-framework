@@ -10,6 +10,8 @@ import json
 from .models import InterestPoint
 
 from .forms import InterestPointForm
+from .forms import UploadFileForm
+
 # Create your views here.
 # def post_list(request):
 #     return render(request, 'world/home.html', {})m
@@ -164,13 +166,10 @@ def mapOperation(request):
 		y = float(y)
 		location = gpsCoords(x,y,ul, lr,12,12)
 		interest_point = InterestPoint.objects.all().filter(location=location)
-		response_data = {}
 		if(len(interest_point)==0):
-			response_data['operation'] = 'create'
 			return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 		if(len(interest_point)==1):
-			response_data['operation'] = 'edit'
 			return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def mapForm(request):
@@ -185,10 +184,57 @@ def mapForm(request):
 		interest_point = InterestPoint.objects.all().filter(location=location)
 		if(len(interest_point)==0):
 			form = InterestPointForm()
-			return render(request, 'form.html', {'form':form})
+			return render(request, 'form.html', {'form':form, 'x':x, 'y':y})
 
 		if(len(interest_point)==1):
 			ip = InterestPoint.objects.filter(location=location)
 			form = InterestPointForm(instance=ip[0])
-			return render(request, 'form.html', {'form':form})
+			return render(request, 'form.html', {'form':form, 'x':x,'y':y})
 
+	if request.method == 'POST':
+			x = request.POST.get('x', None)
+			y = request.POST.get('y', None)
+			ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
+			lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
+			x = float(x)
+			y = float(y)
+			location = gpsCoords(x,y,ul, lr,12,12)
+			interest_points = InterestPoint.objects.all().filter(location=location)
+			if(len(interest_points)==0):
+				# create and save
+				form = InterestPointForm(request.POST)
+				if form.is_valid():
+					interest_point = InterestPoint(location=location)
+					form = InterestPointForm(request.POST, instance=interest_point)
+					form.save()
+					img_url = '/static/golconda.jpg'
+					form = InterestPointForm()
+					return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+		
+				else:
+					html = "<html><body>" +str(form.errors)+"</body></html>"
+					return HttpResponse(html, status=400)
+			if(len(interest_points)==1):
+				#edit save
+				interest_point = interest_points[0] #will work only when location is primary key
+				form = InterestPointForm(request.POST, instance=interest_point)
+				form.save()
+				img_url = '/static/golconda.jpg'
+				form = InterestPointForm()
+				return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+				
+
+
+def uploadFile(request):
+	if request.method == "POST":
+		form = UploadFileForm(request.POST, request.FILES)             
+        	if form.is_valid():                                             
+            		imageObject = form.save()
+            		html = "<html><body>"+"Success!"+"</body></html>"                                 
+            		return HttpResponse(html)                                   
+        	else:                                                           
+            		html = "<html><body>"+str(form.errors)+"</body></html>"         
+            		return HttpResponse(html, status=400)  
+	if request.method == "GET":
+		form = UploadFileForm();
+		return render(request, 'uploadFile.html', {'form':form})

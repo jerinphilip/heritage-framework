@@ -18,7 +18,7 @@ class MapLocationForm(forms.ModelForm):
         fields = '__all__'
 
 
-class ImageForm(forms.ModelForm):
+class UploadFileForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = '__all__'
