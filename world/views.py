@@ -167,11 +167,21 @@ def mapForm(request):
 
 def uploadFile(request):
 	if request.method == "POST":
+		img_url = '/static/golconda.jpg'
+		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
+		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
+		location = gpsCoords(0,0, ul, lr,12,12)
+		ip = InterestPoint.objects.filter(location=location)
+		form = InterestPointForm(instance=ip[0])
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			imageObject = form.save()
-			html = "<html><body>"+"Success!"+"</body></html>"
-			return HttpResponse(html)
+			# html = "<html><body>"+"Success!"+"</body></html>"
+			# return HttpResponse(html)
+			# return render(request, 'world/mapInteractive.html')
+			return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+
+		
 		else:
 			html = "<html><body>"+str(form.errors)+"</body></html>"
 			return HttpResponse(html, status=400)
