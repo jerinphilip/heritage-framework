@@ -41,10 +41,10 @@ def mapInteractive(request):
 		img_url = '/static/golconda.jpg'
 		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
-		location = gpsCoords(0,0, ul, lr,12,12)
+		location = gpsCoords(0,0, ul, lr,19,19)
 		ip = InterestPoint.objects.filter(location=location)
 		form = InterestPointForm(instance=ip[0])
-		return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+		return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 
 def interestPointCreate(request):
 	if request.method == 'POST':
@@ -54,7 +54,7 @@ def interestPointCreate(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		x = float(x)
 		y = float(y)
-		location = gpsCoords(x,y,ul, lr,12,12)
+		location = gpsCoords(x,y,ul, lr,19,19)
 		
 		#create
 		form = InterestPointForm(request.POST)
@@ -64,7 +64,7 @@ def interestPointCreate(request):
 			form.save()
 			img_url = '/static/golconda.jpg'
 			form = InterestPointForm()
-			return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})   
+			return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})   
 		else:
 			html = "<html><body>" +str(form.errors)+"</body></html>"
 			return HttpResponse(html, status=400)
@@ -79,7 +79,7 @@ def interestPointEdit(request):
 			lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 			x = float(x)
 			y = float(y)
-			location = gpsCoords(x,y,ul, lr,12,12)
+			location = gpsCoords(x,y,ul, lr,19,19)
 			
 			if form.is_valid():
 				interest_point = InterestPoint.get(location=location)
@@ -87,7 +87,7 @@ def interestPointEdit(request):
 				form.save()
 				img_url = '/static/golconda.jpg'
 				form = InterestPointForm()
-				return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+				return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 		
 			else:
 				html = "<html><body>" +str(form.errors)+"</body></html>"
@@ -103,7 +103,7 @@ def mapOperation(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		x = float(x)
 		y = float(y)
-		location = gpsCoords(x,y,ul, lr,12,12)
+		location = gpsCoords(x,y,ul, lr,19,19)
 		interest_point = InterestPoint.objects.all().filter(location=location)
 		if(len(interest_point)==0):
 			return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -119,7 +119,7 @@ def mapForm(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		x = float(x)
 		y = float(y)
-		location = gpsCoords(x,y,ul, lr,12,12)
+		location = gpsCoords(x,y,ul, lr,19,19)
 		interest_point = InterestPoint.objects.all().filter(location=location)
 		if(len(interest_point)==0):
 			form = InterestPointForm()
@@ -138,7 +138,7 @@ def mapForm(request):
 			lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 			x = float(x)
 			y = float(y)
-			location = gpsCoords(x,y,ul, lr,12,12)
+			location = gpsCoords(x,y,ul, lr,19,19)
 			interest_points = InterestPoint.objects.all().filter(location=location)
 			if(len(interest_points)==0):
 				# create and save
@@ -149,7 +149,7 @@ def mapForm(request):
 					form.save()
 					img_url = '/static/golconda.jpg'
 					form = InterestPointForm()
-					return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+					return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 		
 				else:
 					html = "<html><body>" +str(form.errors)+"</body></html>"
@@ -161,7 +161,7 @@ def mapForm(request):
 				form.save()
 				img_url = '/static/golconda.jpg'
 				form = InterestPointForm()
-				return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+				return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 				
 
 
@@ -170,7 +170,7 @@ def uploadFile(request):
 		img_url = '/static/golconda.jpg'
 		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
-		location = gpsCoords(0,0, ul, lr,12,12)
+		location = gpsCoords(0,0, ul, lr,19,19)
 		ip = InterestPoint.objects.filter(location=location)
 		form = InterestPointForm(instance=ip[0])
 		form = UploadFileForm(request.POST, request.FILES)
@@ -179,7 +179,7 @@ def uploadFile(request):
 			# html = "<html><body>"+"Success!"+"</body></html>"
 			# return HttpResponse(html)
 			# return render(request, 'world/mapInteractive.html')
-			return render(request, 'world/map.html', {'rows':range(12), 'columns':range(12),'form':form, 'img_url':img_url})
+			return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 
 		
 		else:
@@ -188,3 +188,11 @@ def uploadFile(request):
 	if request.method == "GET":
 		form = UploadFileForm();
 		return render(request, 'uploadFile.html', {'form':form})
+
+def testsample(request):
+	return render(request, 'world/test.html')
+
+def about(request):
+	return render(request, 'about.html')
+def contact(request):
+	return render(request, 'contact.html')

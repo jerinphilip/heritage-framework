@@ -1,7 +1,9 @@
 <html>
-<head>
-<script type="text/javascript" src="/static/js/slideshow.js"></script>
-<link rel="stylesheet" href="/static/slideshow.css"></link>
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   
+  <script type="text/javascript" src="/static/js/slideshow.js"></script>
+  <link rel="stylesheet" href="/static/css/slideshow.css"></link>
+
 <link rel="stylesheet" href="/static/css/formstyle.css" type="text/css" media="all"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,21 +58,6 @@ input[type=submit]:hover {
 
 	}
 
-/*@import url(http://fonts.googleapis.com/css?family=Raleway:400, 900);
-body{background-color:#000; font-family: 'Raleway', sans-serif;
-  color: #fff;}
-header h1{
-  text-align: center;
-  font-weight: bold;
-  margin: 20px 0;
-}
-*{margin:0; padding:0;}
-#container{width:auto; height:auto;}
-#slider{width:800px;margin:0 auto;}
-#slider ul{list-style:none;width:800px;height:300px;}
-#slider ul li{position:absolute;}*/
-
-
 </style>
 	<body>
 		<div class="header">
@@ -105,13 +92,16 @@ header h1{
 						<input value = "submit" type ="submit" />
 						</form>
 						<br><br>
+						<h1>Images</h1>
+
 						<div id="container">
-							<div id="slider">	
+							<div id="slider" style="width:450px; height:450px;">	
 								<ul>
 			    					{% for image in images %}
+			    					<li>
 			    					<p> {{image.caption}} </p>
-			    		 			<li><figure class="img-figure"><img src="/uploads{{image.image.url}}"/></figure></li>
-			    		 			<br><br>
+			    		 			<figure class="img-figure"><img src="/uploads{{image.image.url}}"/></figure>
+			    		 			</li>
 					   				{% endfor %}
 			      				</ul>
 			   		 		</div>

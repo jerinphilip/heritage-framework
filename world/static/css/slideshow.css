@@ -11,3 +11,7 @@ header h1{
 #slider{width:800px;margin:0 auto;}
 #slider ul{list-style:none;width:800px;height:300px;}
 #slider ul li{position:absolute;}
+#slider figure {    display: block;
+    height: 450px;
+    width: 450px;
+}}

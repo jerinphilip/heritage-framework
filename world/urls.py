@@ -17,6 +17,9 @@ urlpatterns = [
     url(r'^mapOperation/$', views.mapOperation, name='mapOperation'),
     url(r'^uploadFile/$', views.uploadFile),
     url(r'^form/$', views.mapForm),
+    url(r'^testsample/$', views.testsample),
+    url(r'^contact/$', views.contact),
+    url(r'^about/$', views.about),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

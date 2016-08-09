@@ -164,7 +164,7 @@ body{
     font-size: 1.1em;
 }
 }
-@media(max-width:991px){
+/*@media(max-width:991px){
 .main-section {
     width: 52%;
 }
@@ -192,7 +192,7 @@ body{
     width: 95%;
 	margin: 2em auto 0
 }
-.header {
+*/.header {
     text-align: center;
     margin-top: 2em;
 }
