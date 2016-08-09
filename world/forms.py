@@ -27,4 +27,6 @@ class UploadFileForm(forms.ModelForm):
 class InterestPointForm(forms.ModelForm):
     class Meta:
         model = InterestPoint
+        title = forms.CharField(max_length=50)
+        description = forms.CharField(widget=forms.Textarea)    
         exclude = ['location']

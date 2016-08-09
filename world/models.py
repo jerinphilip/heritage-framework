@@ -21,7 +21,7 @@ class HeritageSite(models.Model):
 
 class InterestPoint(models.Model):
     title = models.CharField("title", max_length=50)
-    description = models.CharField("description", max_length=500)
+    description = models.CharField("description", max_length=500 )
     location = models.PointField("location")
     def __str__(self):
         return self.title
