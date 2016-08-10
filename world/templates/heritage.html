@@ -2,6 +2,16 @@
 	<title></title>
 	<head></head>
 	<body>
-			nbkjsbd
+			<p>
+			{% block content %}
+    		{% for site in sites %}
+			    					<li>
+			    					<p> {{site.image}} </p>
+			    		 			<p> {{site.title}}</p>
+					   				{% endfor %}
+			{% endblock %}
+			</p>
+			Click here to add more
+			<a href ="/addheritage"> Add heritage </a>
 	</body>
 </html>

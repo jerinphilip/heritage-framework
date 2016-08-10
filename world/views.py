@@ -130,9 +130,6 @@ def testsample(request):
 def about(request):
 	return render(request, 'about.html')
 
-def heritage(request):
-	return render(request, 'heritage.html')
-
 def contact(request):
 	return render(request, 'contact.html')
 
@@ -143,10 +140,16 @@ def addHeritage(request):
 		if form.is_valid():
 			form.save()
 			# return render(request, 'addheritage.html')
-			return HttpResponseRedirect('/thanks/')
+			return HttpResponseRedirect('/heritage/')
 		
 		else:
 			html = "<html><body>"+str(form.errors)+"</body></html>"
 			return HttpResponse(html, status=400)
 
 	return render(request, 'addheritage.html', {'form': form} )
+
+def heritage(request):
+	if request.method == 'GET':
+		sites = HeritageSite.objects.all()
+		return render(request, 'heritage.html', {'sites':sites})
+	# return render(request, 'heritage.html')
