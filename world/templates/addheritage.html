@@ -1,0 +1,28 @@
+<html>
+	<title></title>
+	<head>
+		<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+		<!-- <script type="text/javascript" src="/floppyforms/static/floppyforms/js/MapWidget.js"></script> -->
+		<link rel="stylesheet" href="http://openlayers.org/en/v3.17.1/css/ol.css" type="text/css">
+      	<script src="http://openlayers.org/en/v3.17.1/build/ol.js" type="text/javascript"></script>
+      	        <style>
+      		.map {
+        		height: 400px;
+        		width: 100%;
+      			}
+    	</style>
+    	{{form.media}}
+	</head>
+	<body>
+		
+		<form action ="/addheritage/" method ="post" enctype="multipart/form-data" > 
+			{% csrf_token %}
+			{{form.title}}
+			{{form.image}}
+			{{form.location_upper_left}}
+			{{form.location_lower_right}}
+    			
+			<input value = "submit" type ="submit" />
+		</form>
+	</body>
+</html>

@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .forms import MapImageForm
 from django.contrib.gis.geos import Point
 from django.contrib.gis.geos import GEOSGeometry
 
 import datetime
 import json 
+
 from .models import InterestPoint
 from .models import Image
+from .models import HeritageSite
 
+from .forms import HeritageSiteForm
 from .forms import InterestPointForm
 from .forms import UploadFileForm
 
@@ -23,12 +27,12 @@ def longitude(point):
 	return float(point.x)  
 
 def gpsCoords(i,j,ul, lr,l,b):                                          
-	add_lon=(latitude(lr)-latitude(ul))/2.0                        
-	add_lat=(longitude(lr)-longitude(ul))/2.0                       
+	add_lon = (latitude(lr) - latitude(ul))/2.0                        
+	add_lat = (longitude(lr) - longitude(ul))/2.0                       
 	lat = latitude(ul) +  add_lat*i + add_lat/2.0                                   
 	lon = longitude(ul) + add_lon*j + add_lon/2.0                                  
 	loc = GEOSGeometry('POINT (%f %f)' %(lon, lat))          
-	return (loc)                                                        
+	return (loc)                                                       
 
 def index(request):
 	return render(request, 'world/index.html')
@@ -46,70 +50,6 @@ def mapInteractive(request):
 		form = InterestPointForm(instance=ip[0])
 		return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 
-def interestPointCreate(request):
-	if request.method == 'POST':
-		x = request.POST.get('x', None)
-		y = request.POST.get('y', None)
-		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
-		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
-		x = float(x)
-		y = float(y)
-		location = gpsCoords(x,y,ul, lr,19,19)
-		
-		#create
-		form = InterestPointForm(request.POST)
-		if form.is_valid():
-			interest_point = InterestPoint(location=location)
-			form = InterestPointForm(request.POST, instance=interest_point)
-			form.save()
-			img_url = '/static/golconda.jpg'
-			form = InterestPointForm()
-			return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})   
-		else:
-			html = "<html><body>" +str(form.errors)+"</body></html>"
-			return HttpResponse(html, status=400)
-	
-
-def interestPointEdit(request):
-
-	if request.method == 'POST':
-			x = request.POST.get('x', None)
-			y = request.POST.get('y', None)
-			ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
-			lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
-			x = float(x)
-			y = float(y)
-			location = gpsCoords(x,y,ul, lr,19,19)
-			
-			if form.is_valid():
-				interest_point = InterestPoint.get(location=location)
-				form = InterestPointForm(request.POST, instance=interest_point)
-				form.save()
-				img_url = '/static/golconda.jpg'
-				form = InterestPointForm()
-				return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
-		
-			else:
-				html = "<html><body>" +str(form.errors)+"</body></html>"
-				return HttpResponse(html, status=400)
-
-
-
-def mapOperation(request):
-	if request.method == 'GET':
-		x = request.GET.get('x', None)
-		y = request.GET.get('y', None)
-		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
-		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
-		x = float(x)
-		y = float(y)
-		location = gpsCoords(x,y,ul, lr,19,19)
-		interest_point = InterestPoint.objects.all().filter(location=location)
-		if(len(interest_point)==0):
-			return HttpResponse(json.dumps(response_data), content_type="application/json")
-
-		if(len(interest_point)==1):
-			return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def mapForm(request):
 	if request.method == 'GET':
@@ -164,7 +104,6 @@ def mapForm(request):
 				return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 				
 
-
 def uploadFile(request):
 	if request.method == "POST":
 		img_url = '/static/golconda.jpg'
@@ -176,11 +115,7 @@ def uploadFile(request):
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			imageObject = form.save()
-			# html = "<html><body>"+"Success!"+"</body></html>"
-			# return HttpResponse(html)
-			# return render(request, 'world/mapInteractive.html')
 			return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
-
 		
 		else:
 			html = "<html><body>"+str(form.errors)+"</body></html>"
@@ -194,5 +129,24 @@ def testsample(request):
 
 def about(request):
 	return render(request, 'about.html')
+
+def heritage(request):
+	return render(request, 'heritage.html')
+
 def contact(request):
 	return render(request, 'contact.html')
+
+def addHeritage(request):
+	form = HeritageSiteForm()
+	if request.method == 'POST':
+		form = HeritageSiteForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			# return render(request, 'addheritage.html')
+			return HttpResponseRedirect('/thanks/')
+		
+		else:
+			html = "<html><body>"+str(form.errors)+"</body></html>"
+			return HttpResponse(html, status=400)
+
+	return render(request, 'addheritage.html', {'form': form} )

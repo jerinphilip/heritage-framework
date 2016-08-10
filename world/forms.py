@@ -7,6 +7,7 @@ from .models import HeritageSite
 from .models import InterestPoint
 from .models import Image
 
+
 class MapImageForm(forms.ModelForm):
     class Meta:
         model = MapImage
@@ -17,6 +18,14 @@ class MapLocationForm(forms.ModelForm):
         model = MapLocation
         fields = '__all__'
 
+class HeritageSiteForm(forms.ModelForm):
+    class Meta:
+        model = HeritageSite
+        title = forms.CharField()
+        image = forms.FileField()
+        location_upper_left = forms.PointField()
+        location_lower_right = forms.PointField()
+        exclude = ['location']
 
 class UploadFileForm(forms.ModelForm):
     class Meta:

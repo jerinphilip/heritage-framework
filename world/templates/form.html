@@ -1,6 +1,6 @@
 <html>
-<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-   
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/slideshow.js"></script>
   <link rel="stylesheet" href="/static/css/slideshow.css"></link>
 
@@ -70,14 +70,15 @@ input[type=submit]:hover {
 							{% csrf_token %}
 							
 						<p align = "left">
-						<label for="title">Title</label>
+						<label for="title" style="color:#000000">Title</label>
 						</p>
 						<p align = "center">
 							{{form.title}}
 						</p>
+						
 						<br><br><br><br>
 						<p align = "left">
-							<label for="description" >Description</label>
+							<label for="description" style="color:#000000">Description</label>
 						</p>
 						<p align = "center">
 							{{form.description}}
