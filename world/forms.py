@@ -1,5 +1,6 @@
 # from django.contrib.gis import forms                                    
-# from django import forms
+# from django import forms\
+from django.forms import ModelForm
 from django.contrib.gis import forms
 from .models import MapImage
 from .models import MapLocation
@@ -21,7 +22,7 @@ class MapLocationForm(forms.ModelForm):
 class HeritageSiteForm(forms.ModelForm):
     class Meta:
         model = HeritageSite
-        title = forms.CharField()
+        title = forms.CharField(label='title')
         image = forms.FileField()
         location_upper_left = forms.PointField()
         location_lower_right = forms.PointField()
@@ -34,8 +35,11 @@ class UploadFileForm(forms.ModelForm):
 
 
 class InterestPointForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea)
+    # title = forms.CharField(widget=forms.title)
     class Meta:
         model = InterestPoint
         title = forms.CharField(max_length=50)
-        description = forms.CharField(widget=forms.Textarea)    
+        # description = forms.CharField(widget=forms.Textarea)    
         exclude = ['location']
+    

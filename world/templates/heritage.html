@@ -5,10 +5,11 @@
 			<p>
 			{% block content %}
     		{% for site in sites %}
-			    					<li>
-			    					<p> {{site.image}} </p>
-			    		 			<p> {{site.title}}</p>
-					   				{% endfor %}
+			<li>
+ 			<p> {{site.title}}</p>
+ 			<figure class="img-figure"><img src="/uploads{{site.image.url}}"/></figure>
+ 			<!-- <p> {{site.image}} </p> -->
+				{% endfor %}
 			{% endblock %}
 			</p>
 			Click here to add more
