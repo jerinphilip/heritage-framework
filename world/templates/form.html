@@ -1,6 +1,5 @@
 <html>
 <head>
-
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -8,21 +7,22 @@
 </head>
 	<body>
 		<p align="center">
-			<h1>Interest Point Form</h1>
+			
 		</p>
 		
 		<div class="container">
 		  <!-- <h2>Horizontal form</h2> -->
 		  	<form action ="/form/" method ="post" class="form-horizontal" enctype="multipart/form-data" > 
+				<h1>   Interest Point Form</h1>
 				{% csrf_token %}
 				{% load widget_tweaks %}
+				<p> </p>
+				<p> </p>
+				<p> </p>
 		    	<div class="form-group">
 		      		<label class="control-label col-sm-2" for="email">Title</label>
-		      			<!-- {{form.title}} -->
-
 		      		<div class="col-sm-10">
 		      			{% render_field form.title class+="form-control"%}
-		      			
 		      		</div>
 		    	</div>
 
