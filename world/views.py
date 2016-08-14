@@ -53,8 +53,8 @@ def mapInteractive(request):
 
 def mapForm(request):
 	if request.method == 'GET':
-		x = request.GET.get('x', None)
-		y = request.GET.get('y', None)
+		x = request.GET.get('x')
+		y = request.GET.get('y')
 		ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		x = float(x)
@@ -72,8 +72,8 @@ def mapForm(request):
 			return render(request, 'form.html', {'form':form, 'x':x,'y':y, 'images':images})
 
 	if request.method == 'POST':
-			x = request.POST.get('x', None)
-			y = request.POST.get('y', None)
+			x = request.POST.get('x')
+			y = request.POST.get('y')
 			ul= GEOSGeometry('POINT (%f %f)' %( 17.382200, 78.398806))                 
 			lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 			x = float(x)

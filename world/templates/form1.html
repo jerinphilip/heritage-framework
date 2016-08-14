@@ -1,0 +1,80 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/slideshow.js"></script>
+<link rel="stylesheet" href="/static/css/slideshow.css"></link>
+
+<!-- <link rel="stylesheet" href="/static/css/formstyle.css" type="text/css" media="all"></link> -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{{form.meida}}
+</head>
+	<body>
+		<div class="header">
+			<h1>Interest Point Form</h1>
+		</div>
+		
+		<div class="main">
+				<div class="main-section">
+					<div class="login-form">
+						<form action ="/form/" method ="post" enctype="multipart/form-data" > 
+							{% csrf_token %}
+							{% load widget_tweaks %}
+						<p align = "left">
+						<label for="title" style="color:#000000">Title</label>
+						</p>
+						<p align = "center">
+ 							<!-- {{ form.title|add_class:"input-lg" }} -->
+ 							<!-- {% render_field form.title class+="input-lg" %} -->
+							{{form.title}}
+						</p>
+						
+						<br><br><br><br>
+						<p align = "left">
+							<label for="description" style="color:#000000">Description</label>
+						</p>
+						<p align = "center">
+							{{form.description}}
+						</p>
+						<input type="hidden" name="x" value="{{x}}">
+						<input type="hidden" name="y" value="{{y}}">
+						
+						<br><br><br><br>
+
+						<br><br>
+						<input value = "submit" type ="submit" />
+						</form>
+						<br><br>
+						<h1>Images</h1>
+
+						<div id="container">
+							<div id="slider" style="width:450px; height:450px;">	
+								<ul>
+			    					{% for image in images %}
+			    					<li>
+			    					<p> {{image.caption}} </p>
+			    		 			<figure class="img-figure"><img src="/uploads/{{image.image.url}}"/></figure>
+			    		 			</li>
+					   				{% endfor %}
+			      				</ul>
+			   		 		</div>
+						</div>
+						
+						<br><br>
+						
+					</div>
+				</div>
+			</div>
+
+			
+	</body>
+</html>
+
+	
