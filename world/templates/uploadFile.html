@@ -55,7 +55,12 @@
 						
 						<form action ="/uploadFile/" class="form-horizontal" style="background-color:#FFFFFF; width: 60%; margin:0 auto; solid; border-radius: 15px;" method ="post" enctype="multipart/form-data" >
 							<h1>File Upload Form</h1>
-							<p></p>
+
+							<a href = "/map/" align = button type="button" style="float: right; margin :20px" class="btn btn-info">
+          					<span class="glyphicon glyphicon-arrow-left"></span> 
+        					</button>
+        					</a>	
+							</p>
 
 							{% csrf_token %}
 							{% load widget_tweaks %}

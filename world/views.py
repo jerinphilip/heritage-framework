@@ -115,7 +115,7 @@ def uploadFile(request):
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			imageObject = form.save()
-			return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
+			return render(request, 'world/mappage.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 		
 		else:
 			html = "<html><body>"+str(form.errors)+"</body></html>"

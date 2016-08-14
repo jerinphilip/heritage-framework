@@ -8,31 +8,10 @@
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="/static/css/mobile.css">
 	<script src="/static/js/mobile.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<style>
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-.button:hover {
-    background-color: #308CCE;
-}
-
-.button2 {background-color: #008CBA;
-		  font-size: 12px;
-		  padding: 12px 28px;
-		  border-radius: 8px;
-
-	}
-</style>
 <body>
 	<div id="page">
 		<div id="header">
@@ -64,8 +43,13 @@
 		<div id="body" class="running">
 			<div>
 				<h1>Map</h1>
-				<a href = "/uploadFile/" class="button button2">Upload Files</a>
-				<br><br>
+
+					<a href = "/uploadFile/" align = button type="button" style="float: right; margin :20px" class="btn btn-info">
+          			<span class="glyphicon glyphicon-upload">UploadFiles</span> 
+        			</button>
+        			</a>
+        			
+
                 <iframe width="970" height="680" src="{% url 'mapInteractive' %}"></iframe>
 			</div>
 		</div>
