@@ -153,3 +153,8 @@ def heritage(request):
 		sites = HeritageSite.objects.all()
 		return render(request, 'heritage.html', {'sites':sites})
 	# return render(request, 'heritage.html')
+
+def delete(request,id):
+	u = Image.objects.get(pk=id).delete()
+	img_url = '/static/golconda.jpg'
+	return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19), 'img_url':img_url})

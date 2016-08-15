@@ -50,20 +50,19 @@
 		      		</div>
 		    	</div>
 		  	</form>
-		  	<h1>Images</h1>
-
-						<div id="container">
-							<div id="slider" style="width:450px; height:450px;">	
-								<ul>
-			    					{% for image in images %}
-			    					<li>
-			    					<p> {{image.caption}} </p>
-			    		 			<figure class="img-figure"><img src="/uploads/{{image.image.url}}"/></figure>
-			    		 			</li>
-					   				{% endfor %}
-			      				</ul>
-			   		 		</div>
-						</div>
+		  	<h1 style="text-align:center;">Images</h1>
+				{% for image in images %}
+				<p align="center"><b> {{image.caption}}<b>
+					&nbsp;&nbsp; 
+					<a href="/delete/{{image.id}}/"> 
+          			<span class="glyphicon glyphicon-remove" style="color:DD2222"></span>
+        			</a>
+				</p>
+				<p align="center">
+	 			<img src="/uploads/{{image.image.url}}/"  height="360" width="600">
+	 			</p>
+	 			<br><br>
+   				{% endfor %}
 		</div>
 			
 	</body>

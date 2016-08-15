@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^about/$', views.about),
     url(r'^heritage/$', views.heritage),
     url(r'^addheritage/$', views.addHeritage),
+    url(r'^delete/([0-9]+)/$', views.delete),
+
 
 ]
 
