@@ -1,0 +1,6 @@
+*.pyc
+.*.swp
+uploads/
+env/
+*/__pycache__/
+*/__pycache__/

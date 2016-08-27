@@ -47,7 +47,8 @@ def mapInteractive(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		location = gpsCoords(0,0, ul, lr,19,19)
 		ip = InterestPoint.objects.filter(location=location)
-		form = InterestPointForm(instance=ip[0])
+		#form = InterestPointForm(instance=ip[0])
+		form = InterestPointForm()
 		return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
 
 

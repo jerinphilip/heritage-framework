@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'geology',
-        'USER': 'geouser',
-        'PASSWORD': 'geopassword',
+        'NAME': 'heritage',
+        'USER': 'heritage',
+        'PASSWORD': 'heritagepass',
         'HOST': 'localhost',
         'PORT': '',
         # 'ENGINE': 'django.db.backends.sqlite3',
