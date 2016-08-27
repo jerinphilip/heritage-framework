@@ -1,0 +1,5 @@
+geodjango
+django
+django-floppyforms
+django-widget-tweaks
+psycopg2
